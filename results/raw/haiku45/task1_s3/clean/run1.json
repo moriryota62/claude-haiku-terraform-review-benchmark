@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_server_side_encryption_configuration.main\",\n      \"line\": 36,\n      \"title\": \"暗号化アルゴリズムがAES256（サーバー側管理キー）\",\n      \"description\": \"AES256は AWS 管理キーを使用します。より強力なセキュリティと鍵管理の柔軟性が必要な場合は、aws_kms_key を使用した aws/s3 (KMS暗号化) の使用を検討すべきです。\",\n      \"fix\": \"sse_algorithm を \\\"aws:kms\\\" に変更し、kms_master_key_id パラメータで KMS キーを指定してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 23,\n      \"title\": \"バージョニング有効化は推奨されるがMFA Deleteが無効\",\n      \"description\": \"バージョニングが有効になっていますが、MFA Delete保護がありません。重要なデータを保護するには、MFA認証を必須にすることで誤削除を防止できます。\",\n      \"fix\": \"aws_s3_bucket_versioning リソースに mfa_delete = true を追加してください（ただし、事前にルートアカウントの MFA が必須）。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_s3_bucket_server_side_encryption_configuration.main\",\n      \"line\": 39,\n      \"title\": \"非推奨の rule ブロック構文\",\n      \"description\": \"aws_s3_bucket_server_side_encryption_configuration の rule ブロックはDeprecatedです。rules ブロック（複数形）を使用する必要があります。\",\n      \"fix\": \"rule ブロックを rules ブロックに変更してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 23,\n      \"title\": \"CloudTrail ログ記録の欠落\",\n      \"description\": \"S3 バケットの操作を監査するための設定（CloudTrail ロギング、S3 Access Logs など）がありません。コンプライアンスと監査追跡の観点から推奨されます。\",\n      \"fix\": \"aws_s3_bucket_logging リソースを追加して、アクセスログを別のバケットに記録してください。\"\n    }\n  ]\n}\n```",
+  "seconds": 5.52,
+  "usage": {
+    "inputTokens": 1699,
+    "outputTokens": 746,
+    "totalTokens": 2445,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task1_s3",
+  "variant": "clean",
+  "run": 1
+}

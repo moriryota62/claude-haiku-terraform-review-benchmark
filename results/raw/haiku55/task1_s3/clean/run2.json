@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 25,\n      \"title\": \"tags変数の説明と実際の適用範囲が一致しない\",\n      \"description\": \"variable \\\"tags\\\" の description は「all resources」に適用されると記載していますが、実際に tags が設定されているのは aws_s3_bucket.main のみです(line 25)。versioning、encryption、public_access_block、bucket_policy などの関連リソースには tags が渡されていません。説明と実装の食い違いにより、利用者が全リソースにタグが付くと誤解する可能性があります。\",\n      \"fix\": \"variable の description を「Tags applied to the S3 bucket」のように実態に合わせて修正するか、タグを付与できるリソースには同じ tags を適用してください。または provider の default_tags を利用する方法もあります。\"\n    }\n  ]\n}\n```",
+  "seconds": 7.68,
+  "usage": {
+    "inputTokens": 1881,
+    "outputTokens": 1398,
+    "totalTokens": 3279,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task1_s3",
+  "variant": "clean",
+  "run": 2
+}

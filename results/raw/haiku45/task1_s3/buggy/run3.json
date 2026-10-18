@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_s3_bucket.s3_bucket\",\n      \"line\": 21,\n      \"title\": \"リソース名がリソースタイプ名を繰り返している\",\n      \"description\": \"コーディング規約により、リソース名にリソースタイプの名前を繰り返すべきではありません。resource \\\"aws_s3_bucket\\\" \\\"s3_bucket\\\" は、s3_bucket が redundant です。\",\n      \"fix\": \"resource \\\"aws_s3_bucket\\\" \\\"main\\\" に変更し、以下のリソースで参照を更新してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"convention\",\n      \"resource\": \"variable.tags\",\n      \"line\": 17,\n      \"title\": \"variable に type と description がない\",\n      \"description\": \"コーディング規約により、variable ブロックには必ず type と description を記載する必要があります。\",\n      \"fix\": \"type = map(string) と description を追加してください。例: type = map(string)、description = \\\"Tags to apply to S3 bucket\\\"\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_public_access_block.main\",\n      \"line\": 45,\n      \"title\": \"パブリックアクセスブロックが不完全に設定されている\",\n      \"description\": \"block_public_policy と restrict_public_buckets が false に設定されており、公開ポリシーが適用される可能性があります。これはセキュリティリスクです。\",\n      \"fix\": \"block_public_policy = true と restrict_public_buckets = true に変更してください。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_policy.public_read\",\n      \"line\": 68,\n      \"title\": \"S3 バケットが完全に公開されている\",\n      \"description\": \"ポリシーで principals が \\\"*\\\" に設定されており、全インターネットユーザーが GetObject できます。これは意図的な設定でない限りセキュリティリスクです。\",\n      \"fix\": \"公開が必要かを確認し、必要な場合は CloudFront + OAI の使用、または特定の IP/AWS アカウントに限定してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket_versioning.main\",\n      \"line\": 26,\n      \"title\": \"バージョニングが Suspended に設定されている\",\n      \"description\": \"S3 バージョニングが明示的に Suspended に設定されており、誤削除からの復旧やデータ保護が限定されます。\",\n      \"fix\": \"重要なデータの場合は status = \\\"Enabled\\\" に変更するか、意図的な設定であれば設定値の妥当性を確認してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"output.bucket_arn\",\n      \"line\": 75,\n      \"title\": \"output に description がない\",\n      \"description\": \"コーディング規約により、output ブロックには必ず description を記載する必要があります。\",\n      \"fix\": \"description = \\\"ARN of the S3 bucket\\\" などの説明を追加してください。\"\n    }\n  ]\n}\n```",
+  "seconds": 7.03,
+  "usage": {
+    "inputTokens": 1586,
+    "outputTokens": 964,
+    "totalTokens": 2550,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task1_s3",
+  "variant": "buggy",
+  "run": 3
+}

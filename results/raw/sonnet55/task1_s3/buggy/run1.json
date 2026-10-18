@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"critical\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_policy.public_read\",\n      \"line\": 68,\n      \"title\": \"バケット内の全オブジェクトが全世界に公開されている\",\n      \"description\": \"バケットポリシー(data.aws_iam_policy_document.public_read)でPrincipalを「*」にして s3:GetObject を Allow しており、バケット内の全オブジェクトが認証なしで誰でも読み取れる。公開用途が明示されていない汎用バケットでは、情報漏えいに直結する。\",\n      \"fix\": \"公開ポリシーを削除する。静的コンテンツ配信が目的なら、CloudFrontとOrigin Access Control(OAC)経由でのみ読み取りを許可する。特定のIAMプリンシパルやVPCエンドポイントに限定する方法もある。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_public_access_block.main\",\n      \"line\": 49,\n      \"title\": \"block_public_policy が false でパブリックポリシーを許可している\",\n      \"description\": \"block_public_policy = false のため、パブリックなバケットポリシーを設定できてしまう。上記の公開ポリシーが適用できてしまう原因であり、誤設定に対する防御が無効化されている。\",\n      \"fix\": \"block_public_policy = true に設定する。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_public_access_block.main\",\n      \"line\": 51,\n      \"title\": \"restrict_public_buckets が false で公開アクセスが制限されていない\",\n      \"description\": \"restrict_public_buckets = false のため、パブリックポリシーが設定されていると、認証なしの第三者によるアクセスが実際に許可される。4項目のうち2項目が無効で、パブリックアクセスブロックが不完全。\",\n      \"fix\": \"restrict_public_buckets = true に設定する。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket_versioning.main\",\n      \"line\": 30,\n      \"title\": \"バージョニングが Suspended になっている\",\n      \"description\": \"status = \\\"Suspended\\\" ではバージョニングが有効化されない。新規バケットに対してSuspendedを指定する意味も乏しい。誤削除や上書きからの復旧ができず、データ保護の観点で問題がある。\",\n      \"fix\": \"status = \\\"Enabled\\\" に変更する。あわせて、古いバージョンを削除するライフサイクルルールの設定も検討する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_s3_bucket.s3_bucket\",\n      \"line\": 21,\n      \"title\": \"リソース名にリソースタイプ名が含まれている\",\n      \"description\": \"リソース名「s3_bucket」がリソースタイプ aws_s3_bucket の名前を繰り返しており、規約2に違反している。同名を参照している箇所(27, 35, 46, 59, 69, 76行目)にも影響する。\",\n      \"fix\": \"リソース名を「main」などに変更し、すべての参照(aws_s3_bucket.main.id など)も更新する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"variable.tags\",\n      \"line\": 17,\n      \"title\": \"variable tags に type と description がない\",\n      \"description\": \"規約4により variable ブロックには type と description が必須だが、どちらも記載されていない。\",\n      \"fix\": \"type = map(string) と description = \\\"Tags to apply to resources\\\" を追加する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"output.bucket_arn\",\n      \"line\": 75,\n      \"title\": \"output に description がない\",\n      \"description\": \"規約5により output ブロックには description が必須だが、記載されていない。\",\n      \"fix\": \"description = \\\"ARN of the S3 bucket\\\" を追加する。\"\n    }\n  ]\n}\n```",
+  "seconds": 9.22,
+  "usage": {
+    "inputTokens": 1765,
+    "outputTokens": 1395,
+    "totalTokens": 3160,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task1_s3",
+  "variant": "buggy",
+  "run": 1
+}

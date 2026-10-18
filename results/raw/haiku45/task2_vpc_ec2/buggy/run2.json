@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_vpc.vpc\",\n      \"line\": 42,\n      \"title\": \"リソース名にリソースタイプ名を繰り返している\",\n      \"description\": \"コーディング規約2により、リソース名にリソースタイプの名前を繰り返してはいけません。`aws_vpc \\\"vpc\\\"`は`aws_vpc \\\"main\\\"`に変更すべきです。\",\n      \"fix\": \"リソース名を\\\"vpc\\\"から\\\"main\\\"に変更してください。また、このリソースを参照している箇所（51行目など）も併せて更新が必要です。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_subnet.public\",\n      \"line\": 56,\n      \"title\": \"同種リソースの複数作成に`count`を使用している\",\n      \"description\": \"コーディング規約6により、同種のリソースを複数作成するループ処理は`count`ではなく`for_each`を使うべきです。\",\n      \"fix\": \"`count`を`for_each`に変更してください。例：`for_each = toset(var.public_subnet_cidrs)`を使用し、インデックスアクセスを置き換えてください。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_route_table_association.public\",\n      \"line\": 77,\n      \"title\": \"同種リソースの複数作成に`count`を使用している\",\n      \"description\": \"コーディング規約6により、同種のリソースを複数作成するループ処理は`count`ではなく`for_each`を使うべきです。\",\n      \"fix\": \"`count`を`for_each`に変更してください。`aws_subnet.public`の変更と組み合わせて、統一したキーを使用してください。\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 84,\n      \"title\": \"SSH接続が全世界に公開されている\",\n      \"description\": \"デフォルトで`allowed_ssh_cidr`が\\\"0.0.0.0/0\\\"に設定されており、SSH(ポート22)が全インターネットに公開されています。これはセキュリティリスクです。\",\n      \"fix\": \"デフォルト値を削除するか、より制限的なCIDR(例：特定のIPアドレスやVPN範囲)に変更してください。本番環境ではユーザーが明示的に指定する必要があります。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 106,\n      \"title\": \"EC2インスタンスのルートボリュームが暗号化されていない\",\n      \"description\": \"120行目で`encrypted = false`と明示的に設定されており、ルートボリュームが暗号化されていません。これはセキュリティベストプラクティスに違反しています。\",\n      \"fix\": \"`encrypted = true`に変更してください。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 112,\n      \"title\": \"EC2メタデータサービスでトークン認証が必須でない\",\n      \"description\": \"114行目で`http_tokens = \\\"optional\\\"`と設定されており、IMDSv2が強制されていません。IMDSv1は脆弱性があり、IMDSv2を必須にすべきです。\",\n      \"fix\": \"`http_tokens = \\\"required\\\"`に変更してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 107,\n      \"title\": \"ハードコードされたAMI IDが使用されている\",\n      \"description\": \"AMI ID \\\"ami-0abcdef1234567890\\\"がハードコードされています。この値は実在しない可能性があり、また地域やバージョン管理の観点から問題があります。\",\n      \"fix\": \"変数化するか、データソース（`data \\\"aws_ami\\\"`）を使用して動的に最新のAMIを取得してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"convention\",\n      \"resource\": \"output.instance_id\",\n      \"line\": 126,\n      \"title\": \"outputに`description`が設定されていない\",\n      \"description\": \"コーディング規約5により、`output`ブロックには必ず`description`を書く必要があります。\",\n      \"fix\": \"`description = \\\"The ID of the EC2 instance\\\"`などの説明を追加してください。\"\n    }\n  ]\n}\n```",
+  "seconds": 8.91,
+  "usage": {
+    "inputTokens": 2191,
+    "outputTokens": 1381,
+    "totalTokens": 3572,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task2_vpc_ec2",
+  "variant": "buggy",
+  "run": 2
+}

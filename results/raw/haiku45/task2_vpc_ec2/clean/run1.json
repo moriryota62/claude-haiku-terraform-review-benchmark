@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 87,\n      \"title\": \"セキュリティグループ名が硬すぎる\",\n      \"description\": \"セキュリティグループに固定名 'web' を指定すると、同じ VPC 内で同じ設定を再度 apply するときに名前の競合エラーが発生する可能性がある。Terraform が名前の一意性を保証できず、同じ VPC に複数のセキュリティグループを作成する場合に問題となる。\",\n      \"fix\": \"name を削除し、name_prefix を使用するか、name を動的に生成する（例：name_prefix = \\\"web-\\\" または name = \\\"${aws_vpc.main.id}-web\\\"）\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"単一 AZ への配置で可用性が不足\",\n      \"description\": \"EC2 インスタンスが単一 AZ（ap-northeast-1a）に固定されており、その AZ の障害時に本番環境が停止する。複数 AZ への冗長化がない。\",\n      \"fix\": \"複数の EC2 インスタンスをサブネット毎に作成するか、Auto Scaling Group を使用して複数 AZ に分散させる。例：for_each で複数インスタンスを作成し、各サブネットに配置する\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 88,\n      \"title\": \"セキュリティグループの説明が不正確\",\n      \"description\": \"セキュリティグループの description が \\\"Allow SSH from a trusted CIDR\\\" ですが、実装ではエグレスルール（0.0.0.0/0 への全許可）も含まれている。説明と実装が一致していない。\",\n      \"fix\": \"description を \\\"SSH ingress and unrestricted egress\\\" などに更新するか、エグレスルールを必要最小限に制限する\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 87,\n      \"title\": \"セキュリティグループリソース名がリソースタイプを繰り返していない\",\n      \"description\": \"リソース名 'web' は適切ですが、コーディング規約に従い、より具体的な用途を示す名前（例：'ssh' や 'instance'）にすることでより明確になる。\",\n      \"fix\": \"リソース名を用途に応じた名前に変更する。例：resource \\\"aws_security_group\\\" \\\"ssh\\\" または resource \\\"aws_security_group\\\" \\\"instance_ssh\\\"\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"EBS ルートボリュームの削除保護がない\",\n      \"description\": \"インスタンス終了時に EBS ボリュームが自動削除されるため、意図しない削除のリスクがある。本番環境ではデータ保護が重要。\",\n      \"fix\": \"root_block_device に delete_on_termination = false を追加するか、スナップショット戦略を実装する\"\n    }\n  ]\n}\n```",
+  "seconds": 7.47,
+  "usage": {
+    "inputTokens": 2244,
+    "outputTokens": 1001,
+    "totalTokens": 3245,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 1
+}

@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 112,\n      \"title\": \"パブリックサブネットに配置されるがパブリックIPが付与されない\",\n      \"description\": \"aws_subnet.public には map_public_ip_on_launch が設定されておらず、aws_instance.web にも associate_public_ip_address や Elastic IP の関連付けがありません。そのためインスタンスにはパブリックIPが付与されず、セキュリティグループで許可した SSH(22/tcp) に外部から到達できません。また、インターネットへの経路がないため dnf による更新などの外向き通信も行えません。\",\n      \"fix\": \"aws_subnet.public に map_public_ip_on_launch = true を設定するか、aws_instance.web に associate_public_ip_address = true を指定してください。固定IPが必要であれば aws_eip を作成して関連付けてください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"SSH接続手段(キーペア・SSMロール)が未定義で、SSH許可ルールが機能しない\",\n      \"description\": \"aws_instance.web に key_name が指定されておらず、iam_instance_profile も設定されていないため、SSH鍵での接続も SSM Session Manager での接続もできません。一方で aws_security_group.web では SSH(22/tcp) を allowed_ssh_cidr に対して開放しており、意図と実装が食い違っています。さらに、SSM を使う場合は IAM ロールが必要です。\",\n      \"fix\": \"運用方針に合わせて、key_name に aws_key_pair を指定して SSH を使うか、AmazonSSMManagedInstanceCore を付与した IAM ロールとインスタンスプロファイル(iam_instance_profile)を作成して SSM Session Manager を使ってください。SSM を採用する場合は、22/tcp の ingress ルールを削除することも検討してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"単一AZ・単一インスタンスで冗長性がない\",\n      \"description\": \"aws_instance.web は aws_subnet.public[\\\"a\\\"] の1つの AZ に1台だけ配置されています。AZ 障害やインスタンス障害時にサービスが停止し、自動復旧の仕組みもありません。\",\n      \"fix\": \"用途が本番向けであれば、複数 AZ のサブネットに跨る Auto Scaling Group(と必要に応じてロードバランサー)の利用を検討してください。単体の検証用途であれば、この点を意図として明記してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_vpc.main\",\n      \"line\": 45,\n      \"title\": \"VPCフローログが有効化されていない\",\n      \"description\": \"aws_vpc.main に対応する aws_flow_log が定義されていません。ネットワーク通信の監査や不審なトラフィックの調査ができず、インシデント対応時に必要な証跡が残りません。\",\n      \"fix\": \"aws_flow_log リソースを追加し、aws_vpc.main を対象として CloudWatch Logs または S3 にログを出力してください。ログ用の IAM ロールと保持期間の設定も併せて行ってください。\"\n    }\n  ]\n}\n```",
+  "seconds": 15.71,
+  "usage": {
+    "inputTokens": 2493,
+    "outputTokens": 3090,
+    "totalTokens": 5583,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 2
+}

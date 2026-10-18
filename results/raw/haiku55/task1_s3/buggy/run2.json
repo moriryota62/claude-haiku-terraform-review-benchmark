@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_public_access_block.main\",\n      \"line\": 49,\n      \"title\": \"パブリックアクセスブロックの一部が無効\",\n      \"description\": \"block_public_policy = false と restrict_public_buckets = false になっており、公開バケットポリシーの追加とパブリックポリシーを持つバケットへの匿名アクセスが制限されていません。line 68 のバケットポリシーと組み合わさると、意図せず公開範囲が広がるおそれがあります。公開が不要であれば両方を true にすべきです。\",\n      \"fix\": \"block_public_policy = true\\nrestrict_public_buckets = true に変更する。公開配信が必要な場合は、対象を絞った設定に限定し、その理由をコメントに残す。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_policy.public_read\",\n      \"line\": 68,\n      \"title\": \"バケット全オブジェクトへの匿名読み取りを許可\",\n      \"description\": \"data.aws_iam_policy_document.public_read (line 54-66) で Principal \\\"*\\\" に対し s3:GetObject をバケット内の全オブジェクトに付与しています。機密データが含まれる場合は情報漏えいにつながります。公開が意図したものか確認が必要です。\",\n      \"fix\": \"公開が不要であれば aws_s3_bucket_policy とその data ブロックを削除する。公開配信が必要な場合は、対象プレフィックスやCloudFrontのOAC経由に限定し、公開範囲を最小化する。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket_versioning.main\",\n      \"line\": 30,\n      \"title\": \"バージョニングが無効化されている\",\n      \"description\": \"status が \\\"Suspended\\\" のため、オブジェクトの上書きや削除から復旧できません。誤操作やランサムウェアへの耐性が低下します。新規バケットでは通常 \\\"Enabled\\\" を設定します。\",\n      \"fix\": \"status = \\\"Enabled\\\" に変更する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_s3_bucket.s3_bucket\",\n      \"line\": 21,\n      \"title\": \"リソース名にリソースタイプ名を繰り返している\",\n      \"description\": \"リソースタイプ aws_s3_bucket に対してリソース名 s3_bucket を使っており、規約2(リソース名にリソースタイプの名前を繰り返さない)に違反しています。\",\n      \"fix\": \"resource \\\"aws_s3_bucket\\\" \\\"main\\\" のように用途を表す名前にし、参照箇所(line 27, 35, 46, 59, 69, 76)も合わせて修正する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"var.tags\",\n      \"line\": 17,\n      \"title\": \"variable \\\"tags\\\" に type と description がない\",\n      \"description\": \"variable ブロックには type と description が必須です(規約4)。現在は default のみで、型と説明がありません。\",\n      \"fix\": \"variable \\\"tags\\\" {\\n  type        = map(string)\\n  description = \\\"バケットに付与するタグ\\\"\\n  default     = {}\\n}\\n のように type と description を追加する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"output.bucket_arn\",\n      \"line\": 75,\n      \"title\": \"output に description がない\",\n      \"description\": \"output ブロックには description が必須です(規約5)。\",\n      \"fix\": \"output \\\"bucket_arn\\\" に description = \\\"S3バケットのARN\\\" を追加する。\"\n    }\n  ]\n}\n```",
+  "seconds": 11.26,
+  "usage": {
+    "inputTokens": 1765,
+    "outputTokens": 2390,
+    "totalTokens": 4155,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task1_s3",
+  "variant": "buggy",
+  "run": 2
+}

@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": []\n}\n```",
+  "seconds": 2.56,
+  "usage": {
+    "inputTokens": 1881,
+    "outputTokens": 250,
+    "totalTokens": 2131,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task1_s3",
+  "variant": "clean",
+  "run": 3
+}

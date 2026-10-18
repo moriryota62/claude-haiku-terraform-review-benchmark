@@ -1,0 +1,65 @@
+54 jobs
+done haiku45 task1_s3 buggy 2 6.71 s
+done haiku45 task1_s3 buggy 3 7.03 s
+done haiku45 task1_s3 buggy 1 7.83 s
+done haiku45 task1_s3 clean 2 4.79 s
+done haiku45 task1_s3 clean 1 5.52 s
+done haiku45 task1_s3 clean 3 8.09 s
+done haiku45 task2_vpc_ec2 buggy 1 8.09 s
+done haiku45 task2_vpc_ec2 buggy 2 8.91 s
+done haiku45 task2_vpc_ec2 buggy 3 8.39 s
+done haiku45 task2_vpc_ec2 clean 1 7.47 s
+done haiku45 task2_vpc_ec2 clean 2 7.57 s
+done haiku45 task2_vpc_ec2 clean 3 6.45 s
+done haiku45 task3_alb_asg_rds buggy 1 14.34 s
+done haiku45 task3_alb_asg_rds buggy 3 11.0 s
+done haiku45 task3_alb_asg_rds buggy 2 16.79 s
+done haiku45 task3_alb_asg_rds clean 1 6.44 s
+done haiku45 task3_alb_asg_rds clean 2 8.56 s
+done haiku45 task3_alb_asg_rds clean 3 7.68 s
+done sonnet55 task1_s3 buggy 1 9.22 s
+done sonnet55 task1_s3 clean 1 3.17 s
+done sonnet55 task1_s3 clean 2 3.07 s
+done sonnet55 task1_s3 buggy 3 10.86 s
+done sonnet55 task1_s3 buggy 2 14.33 s
+done sonnet55 task1_s3 clean 3 2.56 s
+done sonnet55 task2_vpc_ec2 buggy 1 22.83 s
+done sonnet55 task2_vpc_ec2 buggy 2 22.94 s
+done sonnet55 task2_vpc_ec2 buggy 3 22.22 s
+done sonnet55 task2_vpc_ec2 clean 2 10.75 s
+done sonnet55 task2_vpc_ec2 clean 1 11.67 s
+done sonnet55 task2_vpc_ec2 clean 3 11.47 s
+done sonnet55 task3_alb_asg_rds buggy 1 30.0 s
+done sonnet55 task3_alb_asg_rds buggy 3 29.49 s
+done sonnet55 task3_alb_asg_rds buggy 2 32.25 s
+ERR sonnet55 task3_alb_asg_rds clean 1 You must specify a region.
+ERR sonnet55 task3_alb_asg_rds clean 2 You must specify a region.
+ERR sonnet55 task3_alb_asg_rds clean 3 You must specify a region.
+ERR haiku55 task1_s3 buggy 1 You must specify a region.
+ERR haiku55 task1_s3 buggy 2 You must specify a region.
+ERR haiku55 task1_s3 buggy 3 You must specify a region.
+ERR haiku55 task1_s3 clean 1 You must specify a region.
+ERR haiku55 task1_s3 clean 2 You must specify a region.
+ERR haiku55 task1_s3 clean 3 You must specify a region.
+done haiku55 task2_vpc_ec2 buggy 1 13.41 s
+done haiku55 task2_vpc_ec2 buggy 2 13.37 s
+done haiku55 task2_vpc_ec2 buggy 3 12.58 s
+done haiku55 task2_vpc_ec2 clean 1 15.43 s
+done haiku55 task2_vpc_ec2 clean 3 14.54 s
+done haiku55 task2_vpc_ec2 clean 2 15.71 s
+done haiku55 task3_alb_asg_rds buggy 1 23.46 s
+done haiku55 task3_alb_asg_rds buggy 2 24.27 s
+done haiku55 task3_alb_asg_rds buggy 3 26.21 s
+done haiku55 task3_alb_asg_rds clean 1 17.92 s
+done haiku55 task3_alb_asg_rds clean 2 21.91 s
+done haiku55 task3_alb_asg_rds clean 3 21.32 s
+9 jobs
+done sonnet55 task3_alb_asg_rds clean 1 22.28 s
+done sonnet55 task3_alb_asg_rds clean 2 22.11 s
+done sonnet55 task3_alb_asg_rds clean 3 15.98 s
+done haiku55 task1_s3 buggy 1 13.2 s
+done haiku55 task1_s3 buggy 2 11.26 s
+done haiku55 task1_s3 buggy 3 12.95 s
+done haiku55 task1_s3 clean 1 8.24 s
+done haiku55 task1_s3 clean 2 7.68 s
+done haiku55 task1_s3 clean 3 7.47 s

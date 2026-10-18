@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_vpc.vpc\",\n      \"line\": 42,\n      \"title\": \"リソース名がリソースタイプ名を繰り返している\",\n      \"description\": \"コーディング規約2により、リソース名にリソースタイプの名前を繰り返してはいけません。'aws_vpc' のリソース名が 'vpc' になっているため、名前が重複しています。\",\n      \"fix\": \"リソース名を 'main' に変更してください: resource \\\"aws_vpc\\\" \\\"main\\\"\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_subnet.public\",\n      \"line\": 56,\n      \"title\": \"同種リソースの複数作成に count を使用している\",\n      \"description\": \"コーディング規約6により、同種のリソースを複数作成するループ処理は `count` ではなく `for_each` を使う必要があります。\",\n      \"fix\": \"count を for_each に変更してください。例: for_each = zipmap(range(length(var.public_subnet_cidrs)), var.public_subnet_cidrs)\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_route_table_association.public\",\n      \"line\": 77,\n      \"title\": \"同種リソースの複数作成に count を使用している\",\n      \"description\": \"コーディング規約6により、同種のリresource を複数作成するループ処理は `count` ではなく `for_each` を使う必要があります。\",\n      \"fix\": \"count を for_each に変更してください。aws_subnet.public の for_each キーに合わせて実装してください。\"\n    },\n    {\n      \"severity\": \"critical\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 94,\n      \"title\": \"SSH を全世界に公開している\",\n      \"description\": \"allowed_ssh_cidr のデフォルト値が '0.0.0.0/0' に設定されており、SSH ポート (22) が世界中から接続可能になっています。これはセキュリティ上の重大なリスクです。\",\n      \"fix\": \"デフォルト値を特定の IP アドレスまたはCIDR ブロックに限定してください。例: default = \\\"YOUR_IP/32\\\"\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 114,\n      \"title\": \"IMDSv1 が有効になっている\",\n      \"description\": \"http_tokens が 'optional' に設定されており、IMDSv1 (メタデータサービスバージョン1) が有効になっています。IMDSv1 はセキュリティ上の脆弱性があり、IMDSv2 の使用を強制すべきです。\",\n      \"fix\": \"http_tokens を 'required' に変更してください。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 120,\n      \"title\": \"EBS ボリュームが暗号化されていない\",\n      \"description\": \"root_block_device の encrypted が false に設定されており、ディスク上のデータが暗号化されていません。本番環境ではデータ保護のため暗号化が必須です。\",\n      \"fix\": \"encrypted を true に変更してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 107,\n      \"title\": \"ハードコードされた AMI ID が使用されている\",\n      \"description\": \"ami が具体的な値 'ami-0abcdef1234567890' にハードコードされています。この AMI は実在しないか、環境によって異なる可能性があります。\",\n      \"fix\": \"ami を変数として抽出するか、data source を使用して動的に取得してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"output \\\"instance_id\\\"\",\n      \"line\": 126,\n      \"title\": \"output に description がない\",\n      \"description\": \"コーディング規約5により、output ブロックには必ず description を書く必要があります。\",\n      \"fix\": \"description フィールドを追加してください。例: description = \\\"EC2 instance ID\\\"\"\n    }\n  ]\n}\n```",
+  "seconds": 8.09,
+  "usage": {
+    "inputTokens": 2191,
+    "outputTokens": 1283,
+    "totalTokens": 3474,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task2_vpc_ec2",
+  "variant": "buggy",
+  "run": 1
+}

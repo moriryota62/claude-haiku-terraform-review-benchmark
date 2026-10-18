@@ -1,0 +1,147 @@
+{
+  "S3_VAR_NO_DESC": {
+    "lines": [
+      42
+    ],
+    "blocks": [
+      [
+        42,
+        45
+      ]
+    ]
+  },
+  "S3_NAME_REPEAT": {
+    "lines": [
+      97
+    ],
+    "blocks": [
+      [
+        97,
+        104
+      ]
+    ]
+  },
+  "S3_COUNT_LOOP": {
+    "lines": [
+      136
+    ],
+    "blocks": [
+      [
+        135,
+        140
+      ]
+    ]
+  },
+  "S3_DB_SG_OPEN": {
+    "lines": [
+      196
+    ],
+    "blocks": [
+      [
+        186,
+        198
+      ]
+    ]
+  },
+  "S3_IAM_WILDCARD": {
+    "lines": [
+      264,
+      265
+    ],
+    "blocks": [
+      [
+        256,
+        268
+      ]
+    ]
+  },
+  "S3_IMDSV1": {
+    "lines": [
+      287
+    ],
+    "blocks": [
+      [
+        275,
+        299
+      ]
+    ]
+  },
+  "S3_ASG_PUBLIC": {
+    "lines": [
+      306
+    ],
+    "blocks": [
+      [
+        301,
+        315
+      ]
+    ]
+  },
+  "S3_ASG_HEALTHCHECK_EC2": {
+    "lines": [
+      308
+    ],
+    "blocks": [
+      [
+        301,
+        315
+      ]
+    ]
+  },
+  "S3_RDS_UNENCRYPTED": {
+    "lines": [
+      329
+    ],
+    "blocks": [
+      [
+        322,
+        340
+      ]
+    ]
+  },
+  "S3_HARDCODED_PASSWORD": {
+    "lines": [
+      332
+    ],
+    "blocks": [
+      [
+        322,
+        340
+      ]
+    ]
+  },
+  "S3_NO_MULTI_AZ": {
+    "lines": [
+      335
+    ],
+    "blocks": [
+      [
+        322,
+        340
+      ]
+    ]
+  },
+  "S3_RDS_PUBLIC": {
+    "lines": [
+      336
+    ],
+    "blocks": [
+      [
+        322,
+        340
+      ]
+    ]
+  },
+  "S3_NO_BACKUP_FINAL_SNAPSHOT": {
+    "lines": [
+      337,
+      339
+    ],
+    "blocks": [
+      [
+        322,
+        340
+      ]
+    ]
+  }
+}

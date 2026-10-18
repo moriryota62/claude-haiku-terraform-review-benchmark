@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_lb_listener.http\",\n      \"line\": 225,\n      \"title\": \"HTTPSがなく平文HTTPのみで公開している\",\n      \"description\": \"インターネット向けのALBが80番ポートのHTTPリスナーのみを持ち、通信が暗号化されていません。認証情報やセッションが盗聴・改ざんされるリスクがあります。また、HTTPSリスナーがないためACM証明書も利用できません。\",\n      \"fix\": \"ACM証明書を用意し、443番ポートのHTTPSリスナー(protocol = \\\"HTTPS\\\", ssl_policy, certificate_arn を指定)を追加してください。80番リスナーはdefault_actionをtype = \\\"redirect\\\"にして443へリダイレクトしてください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_nat_gateway.main\",\n      \"line\": 98,\n      \"title\": \"NAT Gatewayが単一AZに存在する\",\n      \"description\": \"NAT Gatewayが1つだけ、ap-northeast-1aのpublicサブネット(aws_subnet.public[\\\"a\\\"])に作成されています。このAZに障害が起きると、ap-northeast-1cのプライベートサブネットを含む全プライベートサブネットからの外向き通信が止まります。さらに1cのワークロードからの通信はAZ間転送となりコストも増えます。\",\n      \"fix\": \"AZごとにEIPとNAT Gatewayを作成し(for_eachで管理)、各プライベートサブネット用のルートテーブルを、同じAZのNAT Gatewayを指すように分けてください。コストを優先する場合は、その判断をコメントで明示してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_lb.main\",\n      \"line\": 201,\n      \"title\": \"ALBに削除保護が設定されていない\",\n      \"description\": \"aws_lbにenable_deletion_protectionが設定されていません。誤操作や誤ったterraform destroyでALBが削除されると、公開エンドポイントがすぐに失われます。\",\n      \"fix\": \"enable_deletion_protection = true を追加してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.alb\",\n      \"line\": 156,\n      \"title\": \"ALBのアウトバウンドが全開放されている\",\n      \"description\": \"egressで全プロトコル・全宛先(0.0.0.0/0)を許可しています。ALBの転送先はアプリケーション用のSG(aws_security_group.app)だけなので、必要以上に通信範囲が広くなっています。\",\n      \"fix\": \"egressを削除し、aws_security_group.appの80番ポートへの宛先を指定したルール(security_groups = [aws_security_group.app.id])に置き換えてください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.app\",\n      \"line\": 178,\n      \"title\": \"アプリケーションSGのアウトバウンドが全開放されている\",\n      \"description\": \"egressで全プロトコル・全宛先(0.0.0.0/0)を許可しています。アプリケーションサーバーが必要とする通信(HTTPS、NAT経由のパッケージ取得など)に絞っていないため、侵害時の影響範囲が広がります。\",\n      \"fix\": \"必要な宛先・ポートだけを許可するように絞ってください。例として、HTTPSの0.0.0.0/0と、DB用SGへの3306のみを許可する形が考えられます。\"\n    }\n  ]\n}\n```",
+  "seconds": 17.92,
+  "usage": {
+    "inputTokens": 5276,
+    "outputTokens": 3646,
+    "totalTokens": 8922,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task3_alb_asg_rds",
+  "variant": "clean",
+  "run": 1
+}

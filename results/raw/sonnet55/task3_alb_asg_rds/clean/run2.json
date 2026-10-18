@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"security\",\n      \"resource\": \"aws_lb_listener.http\",\n      \"line\": 225,\n      \"title\": \"ALBがHTTP(80)のみで公開されており、HTTPS/TLS終端がない\",\n      \"description\": \"インターネット向けALBのリスナーが平文HTTPのみで、HTTPSリスナーもHTTPSへのリダイレクトもありません。クライアントとALB間の通信が暗号化されず、盗聴や改ざんのリスクがあります。ALB用セキュリティグループ(148行目付近)もポート80のみを許可しており、443が使えない構成です。\",\n      \"fix\": \"ACM証明書を用意し、aws_lb_listenerを443/HTTPSで追加します(ssl_policyにはTLS1.2以上のポリシーを指定)。80のリスナーは301でHTTPSへリダイレクトするようにし、aws_security_group.albに443のingressを追加します。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_nat_gateway.main\",\n      \"line\": 98,\n      \"title\": \"NAT Gatewayが単一AZ(ap-northeast-1a)にしかなく、AZ障害で全プライベートサブネットの外向き通信が止まる\",\n      \"description\": \"NAT Gatewayは1つだけで、publicサブネット\\\"a\\\"に配置されています。プライベートサブネットはa/cの2AZに分かれていますが、全て同じルートテーブルを通してこのNAT Gatewayに向かいます。AZ-aで障害が起きると、AZ-cのアプリサーバーもSSMや外部への通信ができなくなり、マルチAZ構成の意味が損なわれます。\",\n      \"fix\": \"AZごとにaws_eipとaws_nat_gatewayをfor_eachで作成し、プライベートルートテーブルもAZごとに分けて同一AZのNAT Gatewayへルーティングします。コストを優先して単一NATにする場合は、その判断を明記してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_nat_gateway.main\",\n      \"line\": 100,\n      \"title\": \"サブネットのキー\\\"a\\\"をハードコードしている\",\n      \"description\": \"aws_subnet.public[\\\"a\\\"]と固定キーで参照しています。variable public_subnetsは任意のキーを受け付ける定義なので、呼び出し側が\\\"a\\\"を含まない値を渡すとplanが失敗します。\",\n      \"fix\": \"キー指定を変数化します(例: variable nat_subnet_key)。または、AZごとにNAT Gatewayをfor_eachで作成する構成にして固定キー参照をなくします。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_lb.main\",\n      \"line\": 201,\n      \"title\": \"ALBの削除保護とアクセスログが設定されていない\",\n      \"description\": \"enable_deletion_protectionが未設定(デフォルトfalse)で、誤操作やterraform destroyでALBが削除されるおそれがあります。アクセスログ(access_logs)も無効なため、障害調査や監査の手がかりが残りません。RDSには削除保護を設定している一方、ALBにはなく設定方針が一貫していません。\",\n      \"fix\": \"enable_deletion_protection = true を設定します。あわせて、S3バケットを用意して access_logs { bucket = ...  enabled = true } を設定します。\"\n    }\n  ]\n}\n```",
+  "seconds": 22.11,
+  "usage": {
+    "inputTokens": 5276,
+    "outputTokens": 2851,
+    "totalTokens": 8127,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task3_alb_asg_rds",
+  "variant": "clean",
+  "run": 2
+}

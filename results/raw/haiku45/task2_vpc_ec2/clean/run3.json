@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 87,\n      \"title\": \"セキュリティグループ名が静的で衝突リスク\",\n      \"description\": \"セキュリティグループの名前が `web` という固定値に設定されている場合、同じVPC内で複数のスタック運用やモジュール再利用時に名前衝突が発生する可能性がある。Terraformがデフォルトで生成する名前衝突回避機構が機能しない。\",\n      \"fix\": \"`name` 属性を削除するか、`name_prefix` を使用して一意性を確保する。例: `name_prefix = \\\"web-\\\"` とするか、`name` を削除して Terraform に委ねる。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"単一AZへのデプロイによる可用性低下\",\n      \"description\": \"EC2インスタンスが単一のAZ(ap-northeast-1a)にのみデプロイされている。AZ障害時にサービス停止となる。高可用性が必要な場合に対応していない。\",\n      \"fix\": \"複数AZにインスタンスをデプロイするか、Auto Scaling Groupの使用を検討する。または、設計上単一AZで問題ない場合は、その旨をドキュメント化する。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 110,\n      \"title\": \"AMI値の取得方法が不確実\",\n      \"description\": \"`data.aws_ssm_parameter.al2023_ami.value` は SSM Parameter Store から直接取得しているが、戻り値がAMI IDかArn か、フォーマットが保証されていない可能性がある。`data.aws_ami` を使用した方がより明示的で堅牢。\",\n      \"fix\": \"`data \\\"aws_ami\\\"` を使用して Amazon Linux 2023 の最新AMIを直接フィルタリング取得する方法に変更する。例: `filter { name = \\\"name\\\" value = [\\\"al2023-ami-*\\\"] }` など。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"EBS最適化オプションが設定されていない\",\n      \"description\": \"t3.microはEBS最適化対応インスタンスタイプだが、`ebs_optimized` が明示的に有効化されていない。パフォーマンスが最適化されていない可能性。\",\n      \"fix\": \"インスタンス定義に `ebs_optimized = true` を追加する。\"\n    }\n  ]\n}\n```",
+  "seconds": 6.45,
+  "usage": {
+    "inputTokens": 2244,
+    "outputTokens": 849,
+    "totalTokens": 3093,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 3
+}

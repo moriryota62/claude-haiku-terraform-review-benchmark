@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_lb_listener.http\",\n      \"line\": 225,\n      \"title\": \"ALB が HTTP(平文)のみで公開されている\",\n      \"description\": \"ALB がインターネットに 0.0.0.0/0 で 80 番ポートを公開しており、HTTPS リスナーもHTTP→HTTPS のリダイレクトもありません。通信が暗号化されず、認証情報やセッションが盗聴・改ざんされるリスクがあります。\",\n      \"fix\": \"aws_acm_certificate で証明書を用意し、443 番の HTTPS リスナー(ssl_policy を指定)を追加してください。80 番リスナーは default_action を type = \\\"redirect\\\" (protocol = \\\"HTTPS\\\", port = \\\"443\\\", status_code = \\\"HTTP_301\\\") に変更してください。alb の SG にも 443 の ingress を追加し、80 番は必要な場合のみ残してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_nat_gateway.main\",\n      \"line\": 98,\n      \"title\": \"NAT Gateway が単一 AZ にしか存在しない\",\n      \"description\": \"NAT Gateway が public subnet 'a' の 1 つだけに作成されており、private route table (118-127 行) も全 private subnet がこの単一 NAT を経由します。ap-northeast-1a 側で障害が発生すると、ap-northeast-1c 側の private subnet を含め全アプリケーションの外向き通信が停止します。ALB と ASG は複数 AZ に配置されているため、この点だけが単一障害点になっています。\",\n      \"fix\": \"AZ ごとに aws_eip と aws_nat_gateway を for_each で作成し、AZ ごとに private route table を作成して対応する private subnet を関連付けてください。コストを優先する場合は、単一 NAT を採用する理由をコメントや変数で明示してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_lb.main\",\n      \"line\": 201,\n      \"title\": \"ALB に削除保護が設定されていない\",\n      \"description\": \"aws_lb.main に enable_deletion_protection が指定されていないため、誤操作で本番 ALB が削除される可能性があります。DB 側では deletion_protection = true が設定されており、それと整合していません。\",\n      \"fix\": \"aws_lb.main に enable_deletion_protection = true を追加してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_lb.main\",\n      \"line\": 201,\n      \"title\": \"ALB のアクセスログが未設定\",\n      \"description\": \"access_logs ブロックがないため、リクエストの監査ログや障害調査用のログが残りません。セキュリティインシデントの追跡や不正アクセスの検知に支障が出ます。\",\n      \"fix\": \"ログ保存用の S3 バケット(暗号化・パブリックアクセスブロック付き)を作成し、aws_lb.main に access_logs { bucket = ..., enabled = true } を追加してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_vpc.main\",\n      \"line\": 58,\n      \"title\": \"VPC フローログが未設定\",\n      \"description\": \"VPC のフローログが設定されていないため、ネットワークトラフィックの監視や異常な通信の検知・調査ができません。\",\n      \"fix\": \"aws_flow_log を追加し、VPC のトラフィックを CloudWatch Logs または S3 に出力してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_db_instance.main\",\n      \"line\": 314,\n      \"title\": \"RDS のストレージ自動拡張が未設定\",\n      \"description\": \"allocated_storage が 20GB で固定されており max_allocated_storage が指定されていません。データ増加時にストレージ不足で書き込みが停止するリスクがあります。\",\n      \"fix\": \"max_allocated_storage を設定して自動拡張を有効にしてください(例: max_allocated_storage = 100)。\"\n    }\n  ]\n}\n```",
+  "seconds": 21.32,
+  "usage": {
+    "inputTokens": 5276,
+    "outputTokens": 4554,
+    "totalTokens": 9830,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task3_alb_asg_rds",
+  "variant": "clean",
+  "run": 3
+}

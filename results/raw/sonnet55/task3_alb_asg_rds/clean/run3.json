@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"security\",\n      \"resource\": \"aws_lb_listener.http\",\n      \"line\": 225,\n      \"title\": \"ALBがHTTP(80)のみで公開され、HTTPSが使われていない\",\n      \"description\": \"インターネット公開のALBがHTTPのリスナーだけを持ち、ALB用セキュリティグループ(aws_security_group.alb)も80番のみ許可している。クライアントとALB間の通信が平文になり、盗聴や改ざんのリスクがある。また、HTTPSへのリダイレクトも構成されていない。\",\n      \"fix\": \"ACM証明書を用意し、443番のHTTPSリスナー(aws_lb_listener, protocol = \\\"HTTPS\\\", certificate_arn, ssl_policy指定)を追加する。80番のリスナーはHTTPSへの301リダイレクトに変更する。aws_security_group.albには443番のingressを追加する。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_nat_gateway.main\",\n      \"line\": 98,\n      \"title\": \"NAT Gatewayが単一AZ(1台)のみで冗長化されていない\",\n      \"description\": \"NAT Gatewayが1台だけで、AZ aのパブリックサブネット(aws_subnet.public[\\\"a\\\"])に配置されている。private用ルートテーブルも1つで、両AZのプライベートサブネットが同じNAT Gatewayに依存する。AZ aに障害が起きると、AZ cのアプリサーバーも外向き通信(SSMやパッケージ取得など)ができなくなり、マルチAZ構成の意義が損なわれる。また、キー\\\"a\\\"のハードコードは、var.public_subnetsを変更した際にキーが存在せずエラーになる原因にもなる。\",\n      \"fix\": \"AZごとにaws_eipとaws_nat_gatewayをfor_eachで作成し、プライベートサブネットごと(またはAZごと)にルートテーブルを分けて、同一AZのNAT Gatewayへルーティングする。コストを優先して単一NATにする場合は、その判断を明示的に記録する。\"\n    }\n  ]\n}\n```",
+  "seconds": 15.98,
+  "usage": {
+    "inputTokens": 5276,
+    "outputTokens": 2064,
+    "totalTokens": 7340,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task3_alb_asg_rds",
+  "variant": "clean",
+  "run": 3
+}

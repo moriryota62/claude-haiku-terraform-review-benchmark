@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_public_access_block.main\",\n      \"line\": 49,\n      \"title\": \"パブリックポリシーのブロックが無効\",\n      \"description\": \"block_public_policy=false および restrict_public_buckets=false のため、バケットポリシーによる公開アクセスが制限されません。このため、後続の公開読み取りポリシー(aws_s3_bucket_policy.public_read)が有効になり、意図せずバケット全体が公開される可能性があります。\",\n      \"fix\": \"公開が不要であれば block_public_policy = true と restrict_public_buckets = true に設定し、公開ポリシーのリソースも削除してください。公開配信が必要な場合は、CloudFront の OAC 経由にするなど公開範囲を限定する設計にしてください。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"data.aws_iam_policy_document.public_read\",\n      \"line\": 61,\n      \"title\": \"Principal '*' によるバケット内全オブジェクトの公開読み取り\",\n      \"description\": \"principals の type/identifiers が '*' であり、認証なしで誰でもバケット内の全オブジェクト(resources の /*)を読み取れます。機密データの漏えいにつながります。\",\n      \"fix\": \"公開読み取りが本当に必要か確認してください。必要な場合も、対象プレフィックスを限定し、Condition などで接続元を絞るか、CloudFront OAC を利用してください。不要であれば本ポリシーを削除してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket_versioning.main\",\n      \"line\": 30,\n      \"title\": \"バージョニングが Suspended に設定されている\",\n      \"description\": \"status が Suspended のため、新規のバージョニングは有効化されず、誤削除や上書き、ランサムウェアによるデータ破壊からの復旧手段が不足します。Suspended は「一度有効化された後に一時停止する」状態であり、新規構成では意図と合わない可能性が高いです。\",\n      \"fix\": \"status = \\\"Enabled\\\" に変更してください。バージョニングを停止する意図がある場合は、その理由をコメントで明記してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"convention\",\n      \"resource\": \"var.tags\",\n      \"line\": 17,\n      \"title\": \"variable 'tags' に type と description がない\",\n      \"description\": \"規約により variable ブロックには type と description が必須ですが、tags には type も description もありません。型の不一致の検出や利用者への説明が行えません。\",\n      \"fix\": \"type = map(string) と description = \\\"Tags to apply to the S3 bucket\\\" を追加してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_s3_bucket.s3_bucket\",\n      \"line\": 21,\n      \"title\": \"リソース名にリソースタイプの名前が含まれている\",\n      \"description\": \"リソース名 s3_bucket は aws_s3_bucket のリソースタイプ名を繰り返しています。規約で禁止されている命名です。\",\n      \"fix\": \"resource \\\"aws_s3_bucket\\\" \\\"main\\\" などの用途を表す名前に変更し、参照箇所(aws_s3_bucket.main)も合わせて修正してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"convention\",\n      \"resource\": \"output.bucket_arn\",\n      \"line\": 75,\n      \"title\": \"output に description がない\",\n      \"description\": \"規約により output ブロックには description が必須ですが、bucket_arn には description がありません。\",\n      \"fix\": \"description = \\\"ARN of the S3 bucket\\\" を追加してください。\"\n    }\n  ]\n}\n```",
+  "seconds": 13.2,
+  "usage": {
+    "inputTokens": 1765,
+    "outputTokens": 2723,
+    "totalTokens": 4488,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task1_s3",
+  "variant": "buggy",
+  "run": 1
+}

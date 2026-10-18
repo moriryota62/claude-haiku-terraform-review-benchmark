@@ -1,0 +1,72 @@
+{
+  "S1_VAR_NO_META": {
+    "lines": [
+      17
+    ],
+    "blocks": [
+      [
+        17,
+        19
+      ]
+    ]
+  },
+  "S1_NAME_REPEAT": {
+    "lines": [
+      21
+    ],
+    "blocks": [
+      [
+        21,
+        24
+      ]
+    ]
+  },
+  "S1_VERSIONING_SUSPENDED": {
+    "lines": [
+      30
+    ],
+    "blocks": [
+      [
+        26,
+        32
+      ]
+    ]
+  },
+  "S1_PAB_WEAK": {
+    "lines": [
+      49,
+      51
+    ],
+    "blocks": [
+      [
+        45,
+        52
+      ]
+    ]
+  },
+  "S1_PUBLIC_POLICY": {
+    "lines": [
+      58,
+      61,
+      62,
+      63
+    ],
+    "blocks": [
+      [
+        54,
+        66
+      ]
+    ]
+  },
+  "S1_OUTPUT_NO_DESC": {
+    "lines": [
+      75
+    ],
+    "blocks": [
+      [
+        75,
+        77
+      ]
+    ]
+  }
+}

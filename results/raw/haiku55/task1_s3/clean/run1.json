@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"low\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 25,\n      \"title\": \"tags変数の説明と実際の適用範囲が一致しない\",\n      \"description\": \"変数tagsの説明(19行目)は「all resources」に適用されると述べていますが、tagsを受け取っているのはaws_s3_bucket.main(25行目)のみです。aws_s3_bucket_versioning、aws_s3_bucket_server_side_encryption_configuration、aws_s3_bucket_public_access_block、aws_s3_bucket_policyには tags 引数がありません。説明と実装に食い違いがあり、利用者が全リソースにタグが付くと誤解するおそれがあります。\",\n      \"fix\": \"変数の説明を「Tags applied to the S3 bucket」のように実態に合わせて修正してください。全リソースへのタグ付けが必要な場合は、aws_s3_bucket側のtags/default_tags(プロバイダーのdefault_tags)を利用する設計に見直してください。\"\n    }\n  ]\n}\n```",
+  "seconds": 8.24,
+  "usage": {
+    "inputTokens": 1881,
+    "outputTokens": 1597,
+    "totalTokens": 3478,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task1_s3",
+  "variant": "clean",
+  "run": 1
+}

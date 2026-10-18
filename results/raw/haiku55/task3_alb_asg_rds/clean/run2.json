@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_nat_gateway.main\",\n      \"line\": 98,\n      \"title\": \"NAT Gatewayが単一AZに配置され単一障害点になっている\",\n      \"description\": \"NAT Gatewayが public の \\\"a\\\" サブネットに1つだけ作成され、private サブネットのルートテーブル(aws_route_table.private)は両AZからこの NAT を経由する。AZ-a に障害が起きると、AZ-c 側の private サブネットを含め全体の外向き通信が停止する。また、private サブネットは2AZに配置されているため、AZごとの冗長化が意図されていると考えられる。\",\n      \"fix\": \"AZごとに NAT Gateway と EIP を作成し(for_each で public サブネットに対応させる)、各 private サブネットに対応する AZ の NAT Gateway を向くルートテーブルを作成する。コストを優先して単一 NAT とする場合は、その判断をコメントで明示する。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_lb_listener.http\",\n      \"line\": 225,\n      \"title\": \"ALBがHTTP(平文)のみで公開されHTTPSがない\",\n      \"description\": \"ALBのリスナーは 80/HTTP のみで、ALB のセキュリティグループも 80 のみ許可している。ユーザーの通信が暗号化されず、中間者攻撃や盗聴のリスクがある。HTTPS リスナー(ACM 証明書の指定を含む)が存在せず、HTTP から HTTPS へのリダイレクトも設定されていない。\",\n      \"fix\": \"ACM 証明書を用意し、port 443 / protocol HTTPS の aws_lb_listener を追加する(ssl_policy と certificate_arn を指定)。80 番のリスナーは default_action に type = \\\"redirect\\\" を指定し、443 へリダイレクトする。ALB の SG にも 443 の ingress を追加する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_lb.main\",\n      \"line\": 201,\n      \"title\": \"ALBに削除保護が設定されていない\",\n      \"description\": \"本番環境で使われる想定の ALB に enable_deletion_protection が設定されていない。誤操作で ALB が削除されると、公開エンドポイントが即座に失われる。RDS には deletion_protection が設定されているため、他リソースとの整合も取れていない。\",\n      \"fix\": \"aws_lb.main に enable_deletion_protection = true を追加する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_vpc.main\",\n      \"line\": 58,\n      \"title\": \"VPC フローログが有効化されていない\",\n      \"description\": \"VPC に aws_flow_log が定義されておらず、ネットワークトラフィックの記録がない。不審な通信の調査やインシデント対応時に必要な情報が残らない。\",\n      \"fix\": \"CloudWatch Logs または S3 を送信先とする aws_flow_log を aws_vpc.main に対して作成し、必要な IAM ロール(vpc-flow-logs 用)も併せて定義する。\"\n    }\n  ]\n}\n```",
+  "seconds": 21.91,
+  "usage": {
+    "inputTokens": 5276,
+    "outputTokens": 4665,
+    "totalTokens": 9941,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task3_alb_asg_rds",
+  "variant": "clean",
+  "run": 2
+}

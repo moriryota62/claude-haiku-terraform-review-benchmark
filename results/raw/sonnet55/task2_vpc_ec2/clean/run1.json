@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"パブリックサブネットに置いたEC2にパブリックIPが付与されず、SSH接続できない\",\n      \"description\": \"aws_subnet.public には map_public_ip_on_launch が設定されておらず、デフォルトの false になる。aws_instance.web にも associate_public_ip_address の指定や Elastic IP の関連付けがない。そのため、インスタンスにはパブリックIPが付かない。IGWへのルートと allowed_ssh_cidr からのSSH許可が設定されているのに、インターネット経由でSSH接続できない。「パブリックサブネットに置き、信頼するCIDRからSSHする」という意図と実装が食い違っている。\",\n      \"fix\": \"インターネット経由でSSH接続する意図なら、aws_instance.web に `associate_public_ip_address = true` を追加するか、Elastic IP(aws_eip)を関連付ける。または aws_subnet.public に `map_public_ip_on_launch = true` を設定する。インターネットからの接続が不要なら、プライベートサブネットに置き、SSHの代わりにSSM Session Managerを使う構成にする。\"\n    }\n  ]\n}\n```",
+  "seconds": 11.67,
+  "usage": {
+    "inputTokens": 2493,
+    "outputTokens": 1466,
+    "totalTokens": 3959,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 1
+}

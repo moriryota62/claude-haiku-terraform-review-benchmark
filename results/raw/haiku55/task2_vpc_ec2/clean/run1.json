@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"SSH許可の意図に対して到達経路がない\",\n      \"description\": \"SGで送信元CIDRからのTCP22を許可しているが、aws_instance.webにはassociate_public_ip_addressもEIPも設定されておらず、aws_subnet.publicにもmap_public_ip_on_launchがない。そのためインスタンスはパブリックIPを持たず、許可したSSHに到達できない。また、key_nameもIAMインスタンスプロファイル(SSM Session Manager用)もなく、別の接続手段もない。\",\n      \"fix\": \"意図どおりSSHで接続するなら、aws_instance.webにassociate_public_ip_address = true(または aws_subnet.public に map_public_ip_on_launch = true)を設定し、key_nameを指定する。SSH自体を使わないなら、ingressを削除し、SSM用のIAMインスタンスプロファイル(AmazonSSMManagedInstanceCore)を付与する方式に切り替える。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 110,\n      \"title\": \"最新AMIの参照によりApplyのたびにインスタンスが再作成されうる\",\n      \"description\": \"amiにSSMパラメータ(最新のAL2023 AMI)の値を直接渡している。AWSが新しいAMIを公開するとplanに差分が出て、aws_instanceはami変更で強制再作成(destroy/create)となる。意図しないダウンタイムとデータ消失の原因になる。\",\n      \"fix\": \"amiの変更を無視するか、AMI更新を明示的な操作にする。例: lifecycle { ignore_changes = [ami] } を追加する。あるいはAMI IDを変数で固定し、更新を計画的に行う。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 112,\n      \"title\": \"サブネットキー\\\"a\\\"のハードコードによる脆弱性\",\n      \"description\": \"aws_subnet.public[\\\"a\\\"]とキーを直接指定している。public_subnets変数からキー\\\"a\\\"を削除・変更すると、このリソースの参照が失敗するかエラーになる。変数の定義と結びつきが弱い。\",\n      \"fix\": \"変数で配置先のキーを指定する(例: variable \\\"web_subnet_key\\\" { type = string })か、先頭のサブネットを明示的に選ぶlocalを定義して参照する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 97,\n      \"title\": \"SSH許可CIDRに広域のCIDRを防ぐバリデーションがない\",\n      \"description\": \"allowed_ssh_cidrは任意の文字列を受け付けるため、誤って0.0.0.0/0を指定するとSSHが全世界に公開される。既定値がなく必須にしているため、この誤指定を防ぐ仕組みを入れる価値がある。\",\n      \"fix\": \"variable \\\"allowed_ssh_cidr\\\" にvalidationブロックを追加し、0.0.0.0/0や::/0を拒否する。例: condition = !contains([\\\"0.0.0.0/0\\\"], var.allowed_ssh_cidr) と cidrhost などで形式も検証する。\"\n    }\n  ]\n}\n```",
+  "seconds": 15.43,
+  "usage": {
+    "inputTokens": 2493,
+    "outputTokens": 3101,
+    "totalTokens": 5594,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 1
+}

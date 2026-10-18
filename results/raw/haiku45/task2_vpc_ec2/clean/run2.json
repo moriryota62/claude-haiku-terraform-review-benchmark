@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 87,\n      \"title\": \"セキュリティグループ名が静的で一意性が保証されない\",\n      \"description\": \"セキュリティグループに静的な名前 \\\"web\\\" を指定しており、同じスタックを複数回適用したり、複数の環境で使用する場合に名前の競合が発生する可能性があります。AWSではセキュリティグループ名のVPC内での一意性が要求されるため、エラーが発生する可能性があります。\",\n      \"fix\": \"セキュリティグループ名を削除するか、環境やプロジェクト識別子を含めた一意な名前に変更してください。例：name = \\\"${var.environment}-web\\\" または name_prefix = \\\"web-\\\" を使用します。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 88,\n      \"title\": \"セキュリティグループの説明が不正確\",\n      \"description\": \"セキュリティグループの説明に \\\"Allow SSH from a trusted CIDR\\\" と記載されていますが、実際にはHTTPやHTTPSのインバウンドルールがないため、\\\"web\\\" という名前と説明の意図が不一致です。\",\n      \"fix\": \"セキュリティグループの説明をより正確に変更してください。例：\\\"Allow SSH access from trusted CIDR\\\" または、HTTPSなどのルールを追加してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"EC2インスタンスがシングルAZで構成されている\",\n      \"description\": \"EC2インスタンスが単一のアベイラビリティゾーン(ap-northeast-1a)にのみ配置されており、そのAZで障害が発生した場合にサービスが停止します。高可用性が必要な場合、冗長化されていません。\",\n      \"fix\": \"複数のAZに複数のインスタンスをデプロイするか、ロードバランサーと組み合わせて構成してください。または、このインスタンスが意図的に非冗長化されている場合は、コメントで理由を記載してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"EC2インスタンスにバックアップ戦略がない\",\n      \"description\": \"EC2インスタンスのルートボリュームに対して、スナップショットライフサイクルポリシーやバックアップ設定がありません。データ損失のリスクがあります。\",\n      \"fix\": \"必要に応じて、AWS Backupを使用してバックアップポリシーを設定するか、EBS Snapshotライフサイクルポリシーを追加してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_security_group.web\",\n      \"line\": 87,\n      \"title\": \"リソース名が用途の説明に乏しい\",\n      \"description\": \"セキュリティグループのリソース名が \\\"web\\\" となっており、より具体的な用途が不明確です。コーディング規約で、リソース名には用途が分かる一意な名前にすることが推奨されています。\",\n      \"fix\": \"リソース名をより具体的に変更してください。例：\\\"ssh_access\\\" または \\\"app_server\\\" など、実際の役割を反映した名前にしてください。\"\n    }\n  ]\n}\n```",
+  "seconds": 7.57,
+  "usage": {
+    "inputTokens": 2244,
+    "outputTokens": 1094,
+    "totalTokens": 3338,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 2
+}

@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_server_side_encryption_configuration.main\",\n      \"line\": 36,\n      \"title\": \"AES256暗号化は推奨されていない\",\n      \"description\": \"AES256（SSE-S3）はAWSマネージドキーであり、KMS（SSE-KMS）と比べて暗号化キーの制御ができません。セキュリティベストプラクティスでは、本番環境ではSSE-KMSの使用が推奨されています。\",\n      \"fix\": \"sse_algorithmを\\\"aws:kms\\\"に変更し、kms_master_key_idでカスタマーマスターキー（CMK）を指定してください。例：\\n  sse_algorithm     = \\\"aws:kms\\\"\\n  kms_master_key_id = aws_kms_key.s3.arn\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_s3_bucket_server_side_encryption_configuration.main\",\n      \"line\": 39,\n      \"title\": \"非推奨のルートブロック構文の使用\",\n      \"description\": \"aws_s3_bucket_server_side_encryption_configurationで`rule`ブロックは非推奨です。Terraform AWS Provider 5.0以降では`server_side_encryption_configuration`ブロックを使用するべきです。\",\n      \"fix\": \"ルート構造を以下のように修正してください：\\n  server_side_encryption_configuration {\\n    rule {\\n      apply_server_side_encryption_by_default { ... }\\n    }\\n  }\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 23,\n      \"title\": \"S3バケットのログ記録が設定されていない\",\n      \"description\": \"アクセスログやリクエストログが有効になっていないため、監査ログが記録されず、セキュリティインシデントの追跡が困難になります。\",\n      \"fix\": \"aws_s3_bucket_logging リソースを追加して、ログ出力先バケットとプレフィックスを指定してください。例：\\nresource \\\"aws_s3_bucket_logging\\\" \\\"main\\\" {\\n  bucket = aws_s3_bucket.main.id\\n  target_bucket = aws_s3_bucket.logging.id\\n  target_prefix = \\\"logs/\\\"\\n}\"\n    }\n  ]\n}\n```",
+  "seconds": 4.79,
+  "usage": {
+    "inputTokens": 1699,
+    "outputTokens": 722,
+    "totalTokens": 2421,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task1_s3",
+  "variant": "clean",
+  "run": 2
+}

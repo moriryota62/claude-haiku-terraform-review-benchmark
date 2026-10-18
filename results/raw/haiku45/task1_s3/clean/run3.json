@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_server_side_encryption_configuration.main\",\n      \"line\": 36,\n      \"title\": \"暗号化アルゴリズムがAES256（SSE-S3）である\",\n      \"description\": \"AES256はAWSマネージドキー（SSE-S3）を使用します。本番環境ではSSE-KMS（KMS暗号化キー）を使用し、キーの制御と監査ログを有効にすることが推奨されます。\",\n      \"fix\": \"sse_algorithmを\\\"aws:kms\\\"に変更し、kms_master_key_idを指定してください。例：sse_algorithm = \\\"aws:kms\\\", kms_master_key_id = aws_kms_key.s3.arn\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 23,\n      \"title\": \"S3バケットブロックパブリックアクセス設定が不十分\",\n      \"description\": \"aws_s3_bucket_public_access_blockが設定されていますが、バケット所有者アカウントによる暗号化されていないアクセスを防ぐため、バケットポリシーでSSL/TLS接続を強制する必要があります。現在のポリシーは正しく実装されていますが、より明確に非TLSアクセスを拒否する必要があります。\",\n      \"fix\": \"現在のポリシーは適切に非TLSアクセスを拒否しているため、追加修正は不要です。ただしSSE-KMSへの移行を同時に検討してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket.main\",\n      \"line\": 23,\n      \"title\": \"S3バケットのバージョニング後の削除に関する設定がない\",\n      \"description\": \"バージョニングが有効なバケットでは、削除されたオブジェクトのバージョンが無限に蓄積される可能性があります。ライフサイクルポリシーでバージョン削除の保持期間を設定することが推奨されます。\",\n      \"fix\": \"aws_s3_bucket_lifecycle_configurationリソースを追加して、削除されたバージョンの保持期間を設定してください。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_s3_bucket_server_side_encryption_configuration.main\",\n      \"line\": 39,\n      \"title\": \"Terraformドキュメントの非推奨構文を使用している\",\n      \"description\": \"aws_s3_bucket_server_side_encryption_configurationの\\\"rule\\\"ブロックは、現在のTerraform AWS Providerのバージョン4.0以降では\\\"rules\\\"（複数形）として定義されるべきです。\",\n      \"fix\": \"\\\"rule\\\"を\\\"rules\\\"に変更してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"data.aws_iam_policy_document.tls_only\",\n      \"line\": 56,\n      \"title\": \"データソース名がリソース名と混同しやすい\",\n      \"description\": \"\\\"tls_only\\\"という名前はポリシー内容を表していますが、リソース・データソース両方で使用されており、一貫性が欠けています。データソースの命名規約をより明確にすべきです。\",\n      \"fix\": \"必須ではありませんが、データソース名を\\\"tls_only_policy\\\"などと明確に区別することで可読性が向上します。\"\n    }\n  ]\n}\n```",
+  "seconds": 8.09,
+  "usage": {
+    "inputTokens": 1699,
+    "outputTokens": 1085,
+    "totalTokens": 2784,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku45",
+  "model_id": "us.anthropic.claude-haiku-4-5-20251001-v1:0",
+  "task": "task1_s3",
+  "variant": "clean",
+  "run": 3
+}

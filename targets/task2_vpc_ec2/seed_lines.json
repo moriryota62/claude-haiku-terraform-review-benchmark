@@ -1,0 +1,84 @@
+{
+  "S2_SSH_OPEN": {
+    "lines": [
+      33
+    ],
+    "blocks": [
+      [
+        30,
+        34
+      ]
+    ]
+  },
+  "S2_NAME_REPEAT": {
+    "lines": [
+      42
+    ],
+    "blocks": [
+      [
+        42,
+        48
+      ]
+    ]
+  },
+  "S2_COUNT_LOOP": {
+    "lines": [
+      57,
+      78
+    ],
+    "blocks": [
+      [
+        56,
+        64
+      ],
+      [
+        77,
+        82
+      ]
+    ]
+  },
+  "S2_HARDCODED_AMI": {
+    "lines": [
+      107
+    ],
+    "blocks": [
+      [
+        106,
+        124
+      ]
+    ]
+  },
+  "S2_IMDSV1": {
+    "lines": [
+      114
+    ],
+    "blocks": [
+      [
+        106,
+        124
+      ]
+    ]
+  },
+  "S2_EBS_UNENCRYPTED": {
+    "lines": [
+      120
+    ],
+    "blocks": [
+      [
+        106,
+        124
+      ]
+    ]
+  },
+  "S2_OUTPUT_NO_DESC": {
+    "lines": [
+      126
+    ],
+    "blocks": [
+      [
+        126,
+        128
+      ]
+    ]
+  }
+}

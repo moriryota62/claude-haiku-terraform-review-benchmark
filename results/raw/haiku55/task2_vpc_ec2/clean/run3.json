@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"パブリックIPが割り当てられずSSHで到達できない\",\n      \"description\": \"インスタンスはパブリックサブネットに配置され、SGでSSH(22/tcp)を許可しているが、aws_subnet.public(59行目)に map_public_ip_on_launch が未設定で、aws_instance.web にも associate_public_ip_address や Elastic IP の関連付けがない。そのためインスタンスにはパブリックIPが付与されず、SG の許可ルールがあってもインターネット側から SSH できない。意図した構成と実際の動作が食い違っている。\",\n      \"fix\": \"aws_subnet.public に map_public_ip_on_launch = true を設定するか、aws_instance.web に associate_public_ip_address = true を指定する。固定IPが必要なら aws_eip とその関連付けを追加する。SSH鍵を使うなら key_name も指定する。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 112,\n      \"title\": \"サブネットキーのハードコード\",\n      \"description\": \"subnet_id が aws_subnet.public[\\\"a\\\"] とキーを直接指定している。variable public_subnets の default を変更してキー \\\"a\\\" を除外すると、参照先が存在せず plan が失敗する。サブネットの指定が変数定義と結合している。\",\n      \"fix\": \"変数で配置先のキーを受け取る(例: variable \\\"web_subnet_key\\\" を追加し aws_subnet.public[var.web_subnet_key].id を参照する)、または aws_subnet.public の中から先頭のサブネットを選択するよう locals で導出する。\"\n    }\n  ]\n}\n```",
+  "seconds": 14.54,
+  "usage": {
+    "inputTokens": 2493,
+    "outputTokens": 2774,
+    "totalTokens": 5267,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "haiku55",
+  "model_id": "us.anthropic.claude-haiku-5-5",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 3
+}

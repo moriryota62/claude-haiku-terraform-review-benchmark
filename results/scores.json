@@ -1,0 +1,1199 @@
+{
+  "haiku45": {
+    "task1_s3": {
+      "1": {
+        "total": 88.3,
+        "parts": {
+          "recall": 50.0,
+          "location": 5.0,
+          "fix": 15.0,
+          "severity": 3.3,
+          "format": 5.0,
+          "precision": 10.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 6,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 4,
+        "false_positives": [
+          {
+            "severity": "medium",
+            "resource": "aws_s3_bucket_server_side_encryption_configuration.main",
+            "line": 39,
+            "title": "非推奨の rule ブロック構文"
+          }
+        ],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 13.3,
+        "in_tokens": 3285,
+        "out_tokens": 1845,
+        "truncated": false
+      },
+      "2": {
+        "total": 71.7,
+        "parts": {
+          "recall": 33.3,
+          "location": 8.3,
+          "fix": 12.5,
+          "severity": 2.5,
+          "format": 5.0,
+          "precision": 10.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [
+          "S1_PUBLIC_POLICY"
+        ],
+        "n_findings_buggy": 6,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 3,
+        "false_positives": [
+          {
+            "severity": "medium",
+            "resource": "aws_s3_bucket_server_side_encryption_configuration.main",
+            "line": 39,
+            "title": "非推奨のルートブロック構文の使用"
+          }
+        ],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 11.5,
+        "in_tokens": 3285,
+        "out_tokens": 1627,
+        "truncated": false
+      },
+      "3": {
+        "total": 84.2,
+        "parts": {
+          "recall": 50.0,
+          "location": 5.0,
+          "fix": 15.0,
+          "severity": 4.2,
+          "format": 5.0,
+          "precision": 5.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 6,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 5,
+        "false_positives": [
+          {
+            "severity": "high",
+            "resource": "aws_s3_bucket.main",
+            "line": 23,
+            "title": "S3バケットブロックパブリックアクセス設定が不十分"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_s3_bucket_server_side_encryption_configuration.main",
+            "line": 39,
+            "title": "Terraformドキュメントの非推奨構文を使用している"
+          }
+        ],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 15.1,
+        "in_tokens": 3285,
+        "out_tokens": 2049,
+        "truncated": false
+      }
+    },
+    "task2_vpc_ec2": {
+      "1": {
+        "total": 87.1,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 3.6,
+          "format": 5.0,
+          "precision": 5.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 8,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 5,
+        "false_positives": [
+          {
+            "severity": "high",
+            "resource": "aws_security_group.web",
+            "line": 87,
+            "title": "セキュリティグループ名が硬すぎる"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_security_group.web",
+            "line": 88,
+            "title": "セキュリティグループの説明が不正確"
+          }
+        ],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 15.6,
+        "in_tokens": 4435,
+        "out_tokens": 2284,
+        "truncated": false
+      },
+      "2": {
+        "total": 80.7,
+        "parts": {
+          "recall": 50.0,
+          "location": 7.1,
+          "fix": 15.0,
+          "severity": 3.6,
+          "format": 5.0,
+          "precision": 0.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 8,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 5,
+        "false_positives": [
+          {
+            "severity": "high",
+            "resource": "aws_security_group.web",
+            "line": 87,
+            "title": "セキュリティグループ名が静的で一意性が保証されない"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_security_group.web",
+            "line": 88,
+            "title": "セキュリティグループの説明が不正確"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_instance.web",
+            "line": 109,
+            "title": "EC2インスタンスにバックアップ戦略がない"
+          }
+        ],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 16.5,
+        "in_tokens": 4435,
+        "out_tokens": 2475,
+        "truncated": false
+      },
+      "3": {
+        "total": 90.7,
+        "parts": {
+          "recall": 50.0,
+          "location": 7.1,
+          "fix": 15.0,
+          "severity": 3.6,
+          "format": 5.0,
+          "precision": 10.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 8,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 4,
+        "false_positives": [
+          {
+            "severity": "high",
+            "resource": "aws_security_group.web",
+            "line": 87,
+            "title": "セキュリティグループ名が静的で衝突リスク"
+          }
+        ],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 14.8,
+        "in_tokens": 4435,
+        "out_tokens": 2118,
+        "truncated": false
+      }
+    },
+    "task3_alb_asg_rds": {
+      "1": {
+        "total": 96.1,
+        "parts": {
+          "recall": 48.4,
+          "location": 9.2,
+          "fix": 13.8,
+          "severity": 4.6,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [
+          "S3_NAME_REPEAT"
+        ],
+        "n_findings_buggy": 13,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 97,
+            "title": "単一AZのNATゲートウェイによる可用性低下"
+          }
+        ],
+        "n_findings_clean": 5,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 20.8,
+        "in_tokens": 9494,
+        "out_tokens": 3077,
+        "truncated": false
+      },
+      "2": {
+        "total": 12.5,
+        "parts": {
+          "recall": 0.0,
+          "location": 0.0,
+          "fix": 0.0,
+          "severity": 0.0,
+          "format": 2.5,
+          "precision": 10.0
+        },
+        "found": [],
+        "missed": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "n_findings_buggy": 0,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 7,
+        "false_positives": [
+          {
+            "severity": "medium",
+            "resource": "aws_db_instance.main",
+            "line": 309,
+            "title": "RDS database password is randomly generated but not output"
+          }
+        ],
+        "format_ok": {
+          "buggy": false,
+          "clean": true
+        },
+        "seconds": 25.4,
+        "in_tokens": 9494,
+        "out_tokens": 3939,
+        "truncated": false
+      },
+      "3": {
+        "total": 94.2,
+        "parts": {
+          "recall": 48.4,
+          "location": 9.2,
+          "fix": 12.7,
+          "severity": 3.8,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [
+          "S3_NAME_REPEAT"
+        ],
+        "n_findings_buggy": 12,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 6,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 18.7,
+        "in_tokens": 9494,
+        "out_tokens": 2781,
+        "truncated": false
+      }
+    }
+  },
+  "sonnet55": {
+    "task1_s3": {
+      "1": {
+        "total": 98.3,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.3,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 7,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 0,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 12.4,
+        "in_tokens": 3646,
+        "out_tokens": 1712,
+        "truncated": false
+      },
+      "2": {
+        "total": 98.3,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.3,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 6,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 0,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 17.4,
+        "in_tokens": 3646,
+        "out_tokens": 2356,
+        "truncated": false
+      },
+      "3": {
+        "total": 98.3,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.3,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 8,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "low",
+            "resource": "aws_s3_bucket_server_side_encryption_configuration.main",
+            "line": 39,
+            "title": "SSE-S3 (AES256) のみで KMS 鍵を使用していない"
+          }
+        ],
+        "n_findings_clean": 0,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 13.4,
+        "in_tokens": 3646,
+        "out_tokens": 1935,
+        "truncated": false
+      }
+    },
+    "task2_vpc_ec2": {
+      "1": {
+        "total": 98.6,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 9,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_subnet.public",
+            "line": 56,
+            "title": "パブリックサブネットなのにパブリックIPが付与されない"
+          }
+        ],
+        "n_findings_clean": 1,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 34.5,
+        "in_tokens": 4940,
+        "out_tokens": 4625,
+        "truncated": false
+      },
+      "2": {
+        "total": 98.6,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 9,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_instance.web",
+            "line": 109,
+            "title": "パブリックIPが付与されず、SSH許可の意図と実装が食い違う"
+          }
+        ],
+        "n_findings_clean": 1,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 33.7,
+        "in_tokens": 4940,
+        "out_tokens": 4491,
+        "truncated": false
+      },
+      "3": {
+        "total": 98.6,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 9,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_instance.web",
+            "line": 109,
+            "title": "パブリックIPが付与されず、SSH接続の意図が実現されない"
+          }
+        ],
+        "n_findings_clean": 1,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 33.7,
+        "in_tokens": 4940,
+        "out_tokens": 4521,
+        "truncated": false
+      }
+    },
+    "task3_alb_asg_rds": {
+      "1": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [],
+        "n_findings_buggy": 15,
+        "n_extras_buggy": 2,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_lb_listener.http",
+            "line": 227,
+            "title": "ALBがHTTPのみで公開されている"
+          },
+          {
+            "severity": "low",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 99,
+            "title": "NAT Gatewayが単一AZにしかない"
+          }
+        ],
+        "n_findings_clean": 2,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 52.3,
+        "in_tokens": 10696,
+        "out_tokens": 7155,
+        "truncated": false
+      },
+      "2": {
+        "total": 98.8,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 13.8,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [],
+        "n_findings_buggy": 16,
+        "n_extras_buggy": 2,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_lb_listener.http",
+            "line": 227,
+            "title": "ALBがHTTP(平文)のみで公開されている"
+          },
+          {
+            "severity": "low",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 99,
+            "title": "NAT Gatewayが単一AZにしかない"
+          }
+        ],
+        "n_findings_clean": 4,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 54.4,
+        "in_tokens": 10696,
+        "out_tokens": 7596,
+        "truncated": false
+      },
+      "3": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [],
+        "n_findings_buggy": 16,
+        "n_extras_buggy": 2,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_lb_listener.http",
+            "line": 224,
+            "title": "ALBがHTTP(平文)のみで公開されている"
+          },
+          {
+            "severity": "low",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 99,
+            "title": "NATゲートウェイが単一AZのみ"
+          }
+        ],
+        "n_findings_clean": 2,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 45.5,
+        "in_tokens": 10696,
+        "out_tokens": 6549,
+        "truncated": false
+      }
+    }
+  },
+  "haiku55": {
+    "task1_s3": {
+      "1": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 6,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 1,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 21.4,
+        "in_tokens": 3646,
+        "out_tokens": 4320,
+        "truncated": false
+      },
+      "2": {
+        "total": 98.3,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.3,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 6,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 1,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 18.9,
+        "in_tokens": 3646,
+        "out_tokens": 3788,
+        "truncated": false
+      },
+      "3": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S1_NAME_REPEAT",
+          "S1_OUTPUT_NO_DESC",
+          "S1_PAB_WEAK",
+          "S1_PUBLIC_POLICY",
+          "S1_VAR_NO_META",
+          "S1_VERSIONING_SUSPENDED"
+        ],
+        "missed": [],
+        "n_findings_buggy": 7,
+        "n_extras_buggy": 0,
+        "extras": [],
+        "n_findings_clean": 1,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 20.4,
+        "in_tokens": 3646,
+        "out_tokens": 4056,
+        "truncated": false
+      }
+    },
+    "task2_vpc_ec2": {
+      "1": {
+        "total": 98.6,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 9,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_instance.web",
+            "line": 109,
+            "title": "パブリックサブネットに置いたインスタンスにパブリックIPが付与されない"
+          }
+        ],
+        "n_findings_clean": 4,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 28.8,
+        "in_tokens": 4940,
+        "out_tokens": 6012,
+        "truncated": false
+      },
+      "2": {
+        "total": 98.6,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 9,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_subnet.public",
+            "line": 56,
+            "title": "パブリックサブネットに公開IPが割り当てられない"
+          }
+        ],
+        "n_findings_clean": 4,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 29.1,
+        "in_tokens": 4940,
+        "out_tokens": 6066,
+        "truncated": false
+      },
+      "3": {
+        "total": 98.6,
+        "parts": {
+          "recall": 50.0,
+          "location": 8.6,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S2_COUNT_LOOP",
+          "S2_EBS_UNENCRYPTED",
+          "S2_HARDCODED_AMI",
+          "S2_IMDSV1",
+          "S2_NAME_REPEAT",
+          "S2_OUTPUT_NO_DESC",
+          "S2_SSH_OPEN"
+        ],
+        "missed": [],
+        "n_findings_buggy": 9,
+        "n_extras_buggy": 1,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_subnet.public",
+            "line": 56,
+            "title": "パブリックサブネットでパブリックIPが自動割り当てされない"
+          }
+        ],
+        "n_findings_clean": 2,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 27.1,
+        "in_tokens": 4940,
+        "out_tokens": 5600,
+        "truncated": false
+      }
+    },
+    "task3_alb_asg_rds": {
+      "1": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [],
+        "n_findings_buggy": 16,
+        "n_extras_buggy": 2,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 97,
+            "title": "NAT Gatewayが単一AZに存在する単一障害点"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_lb_listener.http",
+            "line": 224,
+            "title": "ALBがHTTPのみで暗号化されていない"
+          }
+        ],
+        "n_findings_clean": 5,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 41.4,
+        "in_tokens": 10696,
+        "out_tokens": 9097,
+        "truncated": false
+      },
+      "2": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [],
+        "n_findings_buggy": 16,
+        "n_extras_buggy": 2,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_lb_listener.http",
+            "line": 224,
+            "title": "ALBがHTTPのみで暗号化されていない"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 97,
+            "title": "NATゲートウェイが単一AZのみ"
+          }
+        ],
+        "n_findings_clean": 4,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 46.2,
+        "in_tokens": 10696,
+        "out_tokens": 10024,
+        "truncated": false
+      },
+      "3": {
+        "total": 100.0,
+        "parts": {
+          "recall": 50.0,
+          "location": 10.0,
+          "fix": 15.0,
+          "severity": 5.0,
+          "format": 5.0,
+          "precision": 15.0
+        },
+        "found": [
+          "S3_ASG_HEALTHCHECK_EC2",
+          "S3_ASG_PUBLIC",
+          "S3_COUNT_LOOP",
+          "S3_DB_SG_OPEN",
+          "S3_HARDCODED_PASSWORD",
+          "S3_IAM_WILDCARD",
+          "S3_IMDSV1",
+          "S3_NAME_REPEAT",
+          "S3_NO_BACKUP_FINAL_SNAPSHOT",
+          "S3_NO_MULTI_AZ",
+          "S3_RDS_PUBLIC",
+          "S3_RDS_UNENCRYPTED",
+          "S3_VAR_NO_DESC"
+        ],
+        "missed": [],
+        "n_findings_buggy": 16,
+        "n_extras_buggy": 2,
+        "extras": [
+          {
+            "severity": "medium",
+            "resource": "aws_lb_listener.http",
+            "line": 226,
+            "title": "ALBがHTTPのみで通信を暗号化しない"
+          },
+          {
+            "severity": "medium",
+            "resource": "aws_nat_gateway.nat_gateway",
+            "line": 97,
+            "title": "NAT Gatewayが単一AZに配置されている"
+          }
+        ],
+        "n_findings_clean": 6,
+        "false_positives": [],
+        "format_ok": {
+          "buggy": true,
+          "clean": true
+        },
+        "seconds": 47.5,
+        "in_tokens": 10696,
+        "out_tokens": 10348,
+        "truncated": false
+      }
+    }
+  }
+}

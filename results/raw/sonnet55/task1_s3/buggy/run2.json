@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"critical\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_policy.public_read\",\n      \"line\": 68,\n      \"title\": \"バケット内の全オブジェクトが全世界に公開されている\",\n      \"description\": \"data.aws_iam_policy_document.public_read(54〜66行目)は、Principal に `*` を指定して s3:GetObject を Allow しています。aws_s3_bucket_policy.public_read(68行目)がこれをバケットに適用するため、認証なしで誰でも全オブジェクトを読み取れます。公開を意図した静的サイトなどでない限り、情報漏洩に直結します。公開が必要な場合も、S3 への直接公開ではなく CloudFront + OAC を使うのが一般的です。\",\n      \"fix\": \"公開用のバケットポリシーと関連する data ソースを削除します。公開配信が必要なら CloudFront と OAC を使い、`Principal = { Service = \\\"cloudfront.amazonaws.com\\\" }` と `AWS:SourceArn` の条件でアクセスを制限してください。\"\n    },\n    {\n      \"severity\": \"high\",\n      \"category\": \"security\",\n      \"resource\": \"aws_s3_bucket_public_access_block.main\",\n      \"line\": 49,\n      \"title\": \"パブリックアクセスブロックが部分的に無効化されている\",\n      \"description\": \"`block_public_policy = false`(49行目)と `restrict_public_buckets = false`(51行目)により、パブリックなバケットポリシーの設定とその有効化が許可されています。この設定が、72行目の depends_on を含むパブリックポリシーの適用を可能にしています。バケットの誤公開に対する最後の防御線が機能していません。\",\n      \"fix\": \"4項目すべてを true にします。`block_public_acls = true`, `block_public_policy = true`, `ignore_public_acls = true`, `restrict_public_buckets = true`。\"\n    },\n    {\n      \"severity\": \"medium\",\n      \"category\": \"reliability\",\n      \"resource\": \"aws_s3_bucket_versioning.main\",\n      \"line\": 30,\n      \"title\": \"バージョニングが Suspended になっている\",\n      \"description\": \"versioning の status が `Suspended` のため、バージョニングが有効化されません。誤削除や上書き時にオブジェクトを復元できず、データ保護や可用性の観点で不利です。新規作成するバケットで Suspended を指定する理由も見当たりません。\",\n      \"fix\": \"`status = \\\"Enabled\\\"` に変更します。必要に応じて、古いバージョンを期限切れにする lifecycle 設定も追加してください。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"variable.tags\",\n      \"line\": 17,\n      \"title\": \"variable に type と description がない\",\n      \"description\": \"規約4では variable ブロックに type と description を必ず書くことになっていますが、`tags` にはどちらもありません。\",\n      \"fix\": \"`type = map(string)` と `description = \\\"Tags to apply to resources\\\"` を追加します。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"aws_s3_bucket.s3_bucket\",\n      \"line\": 21,\n      \"title\": \"リソース名にリソースタイプ名が含まれている\",\n      \"description\": \"規約2では、リソース名にリソースタイプ名を繰り返さないことになっています。`aws_s3_bucket` に対する `s3_bucket` はこれに違反します。他のリソース(27, 35, 46, 59, 69, 76行目)からも参照されているため、変更時はそれらも直す必要があります。\",\n      \"fix\": \"リソース名を `main` に変更し、参照も `aws_s3_bucket.main` に更新します。\"\n    },\n    {\n      \"severity\": \"low\",\n      \"category\": \"convention\",\n      \"resource\": \"output.bucket_arn\",\n      \"line\": 75,\n      \"title\": \"output に description がない\",\n      \"description\": \"規約5では output ブロックに description を必ず書くことになっていますが、`bucket_arn` にはありません。\",\n      \"fix\": \"`description = \\\"ARN of the S3 bucket\\\"` を追加します。\"\n    }\n  ]\n}\n```",
+  "seconds": 14.33,
+  "usage": {
+    "inputTokens": 1765,
+    "outputTokens": 2038,
+    "totalTokens": 3803,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task1_s3",
+  "variant": "buggy",
+  "run": 2
+}

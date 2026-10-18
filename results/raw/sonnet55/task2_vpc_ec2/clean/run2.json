@@ -1,0 +1,17 @@
+{
+  "text": "```json\n{\n  \"findings\": [\n    {\n      \"severity\": \"medium\",\n      \"category\": \"correctness\",\n      \"resource\": \"aws_instance.web\",\n      \"line\": 109,\n      \"title\": \"パブリックサブネットに配置したインスタンスにパブリックIPが付与されない\",\n      \"description\": \"インスタンスはパブリックサブネット(aws_subnet.public[\\\"a\\\"])に置かれ、SGでは許可CIDRからのSSH(22番)を受け付ける設計です。しかし aws_subnet.public には map_public_ip_on_launch が設定されておらず(デフォルトfalse)、aws_instance にも associate_public_ip_address や Elastic IP がありません。そのためインスタンスにパブリックIPが付かず、IGW経由で外部からSSHできません。ルートテーブル、IGW、SG ingress の設定が意図どおりに機能せず、設計意図と実装が食い違っています。\",\n      \"fix\": \"インターネットから直接SSH接続する想定なら、aws_instance に `associate_public_ip_address = true` を設定するか、aws_eip を作成して関連付けます。公開を避けたい場合は、プライベートサブネットに置き、SSMセッションマネージャー経由で接続する構成に変更し、SSHの ingress を削除します。\"\n    }\n  ]\n}\n```",
+  "seconds": 10.75,
+  "usage": {
+    "inputTokens": 2493,
+    "outputTokens": 1299,
+    "totalTokens": 3792,
+    "cacheReadInputTokens": 0,
+    "cacheWriteInputTokens": 0
+  },
+  "stop": "end_turn",
+  "model": "sonnet55",
+  "model_id": "us.anthropic.claude-sonnet-5-5",
+  "task": "task2_vpc_ec2",
+  "variant": "clean",
+  "run": 2
+}
